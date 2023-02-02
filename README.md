@@ -2,9 +2,35 @@
 
 
 
-#### 1. 使用express, webpack-dev-middleware, webpack-hot-middleware启动服务，实现模块热替换。
+#### 1. 使用express, webpack-dev-middleware, webpack-hot-middleware启动服务。
 
-#### 2. 自定义StampWebpackPlugin插件，在不使用hash的情况，在文件名后面加上时间戳，也可让html引用的文件名不同，起到规避缓存的效果。
+
+```
+  const express = require('express');
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+
+  const app = express();
+  const config = require('./webpack.config.js');
+  const compiler = webpack(config);
+  
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: config.output.publicPath,
+    })
+  );
+
+  app.use(webpackHotMiddleware(compiler));
+
+  app.listen(3000, function () {
+    console.log('Example app listening on port 3000!\n');
+  });
+```
+
+#### 2. 实现模块热替换。
+
+#### 3. 自定义StampWebpackPlugin插件，在不使用hash的情况，在文件名后面加上时间戳，也可让html引用的文件名不同，起到规避缓存的效果。
 
 ```
   const HtmlWebpackPlugin = require('html-webpack-plugin');
