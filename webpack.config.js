@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StampWebpackPlugin = require('./plugins/stamp.webpack.plugin');
+const StampWebpackPlugin = require('./plugins/stamp-webpack-plugin');
 
  /** * 
   * @type {import('webpack').Configuration} 
