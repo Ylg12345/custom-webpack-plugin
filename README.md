@@ -30,20 +30,22 @@
 
 #### 2. 实现模块热替换。
 
-if(module.hot) {
+```
+  if(module.hot) {
 
-  let lastEditor = editor;
+    let lastEditor = editor;
 
-  module.hot.accept('./editor.js', () => {
-  
-    const value = lastEditor.value;
-    document.body.removeChild(lastEditor);
-    const newEditor = createEditor();
-    newEditor.value = value;
-    document.body.appendChild(newEditor);
-    lastEditor = newEditor;
-  })
-}
+    module.hot.accept('./editor.js', () => {
+
+      const value = lastEditor.value;
+      document.body.removeChild(lastEditor);
+      const newEditor = createEditor();
+      newEditor.value = value;
+      document.body.appendChild(newEditor);
+      lastEditor = newEditor;
+    })
+  }
+```
 
 #### 3. 自定义StampWebpackPlugin插件，在不使用hash的情况，在文件名后面加上时间戳，也可让html引用的文件名不同，起到规避缓存的效果。
 
